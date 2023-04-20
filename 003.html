@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // 10.4.3
+      function PersonGenrator() {
+        this.age = 25;
+
+        function InnerPersonType() {}
+
+        InnerPersonType.prototype.getAge = function () {
+          // innerPersonType로 만든 인스턴스가 getAge인 메서드를 이용할수 있다
+          return age;
+        };
+
+        return InnerPersonType;
+      }
+
+      const Person = PersonGenrator();
+      const myPerson = new Person();
+
+      const PersonGenerator2 = (function () {
+        let age = 25;
+
+        function InnerPersonType() {}
+
+        InnerPersonType.prototype.getAge = function () {
+          return age;
+        };
+
+        return InnerPersonType;
+      })();
+
+      const myPerson2 = new PersonGenerator2();
+    </script>
+  </body>
+</html>

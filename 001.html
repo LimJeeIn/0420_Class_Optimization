@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // 10.4.2
+      class Sausage {
+        constructor(el1, el2) {
+          this.inside1 = el1; // this가 바라보는것은 클래스를 통해 만들어진 인스턴스를 바라본다
+          this.inside2 = el2;
+        }
+
+        taste() {
+          console.log(
+            `${this.inside1}맛과 ${this.inside2}맛이 나는 소세지다!!`
+          );
+        }
+      }
+
+      class FireSausage extends Sausage {
+        constructor(el1, el2, el3) {
+          // this.inside1 = el1; // this가 바라보는것은 클래스를 통해 만들어진 인스턴스를 바라본다
+          // this.inside2 = el2;
+          super(el1, el2); // 이것이 위의 생성자 함수
+          this.inside3 = el3;
+        }
+
+        // 오버로딩
+        // taste(el1) {
+        //     console.log(`와~~${this.inside1}맛과 ${this.inside2}맛과 ${this.inside3}맛이 나는 소세지다!!`);
+        // }
+
+        // taste(el1, el2) {
+        //     console.log(`와~~${this.inside1}맛과 ${this.inside2}맛과 ${this.inside3}맛이 나는 소세지다!!`);
+        // }
+
+        taste(el1) {
+          if (el1) {
+            console.log(
+              `${this.inside1}맛과 ${this.inside2}맛과 ${this.inside3}맛이 나는 소세지다!!`
+            );
+          } else {
+          }
+        }
+
+        // 오버라이딩
+        // 오버라이딩 - 위의 taste()가 또 있지만 자식에서 생성한 메소드 taste()가 덮어씌어져 실행된다 //
+        // taste() {
+        //     console.log(`와~~${this.inside1}맛과 ${this.inside2}맛과 ${this.inside3}맛이 나는 소세지다!!`);
+        // }
+      }
+
+      const fireSausage = new FireSausage('파맛', '불맛', '키위맛');
+      console.log(fireSausage);
+      const mySausage = new Sausage('선지', '해장국');
+      console.log(mySausage); //Sausage {inside1: '선지', inside2: '해장국'}
+    </script>
+  </body>
+</html>

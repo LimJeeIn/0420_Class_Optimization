@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 50px;
+        height: 50px;
+        background-color: pink;
+        border: 1px solid black;
+        /* transition: .2s; */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div></div>
+    <script>
+      const target = document.querySelector('div');
+      let pos = 0;
+      // 사용자가 어떤 키를 눌렀는지 정보를 저장하는 객체
+      let keys = {};
+
+      // 사용자가 키를 눌렀을때 실행
+      function move(event) {
+        // 키를 눌러서 true
+        keys[event.key] = true; // 이벤트 발생시 어떤 키를 눌렀는지, key = {} 객체의 키값으로 넣어줌
+        console.log(keys);
+      }
+
+      // 사용자가 키에서 손을 땔 때 실행
+      function stop(event) {
+        keys[event.key] = false; // 키를 안 눌러서 false
+        console.log(keys);
+      }
+
+      document.addEventListener('keydown', move);
+      document.addEventListener('keyup', stop);
+
+      // function move(event) {
+      //     const keyName = event.key;
+      //     console.log(keyName);
+
+      //     if (keyName === 'ArrowRight') {
+      //         pos += 5;
+      //         target.style.transform = `translateX(${pos}px)`;
+      //     } else if (keyName === 'ArrowLeft') {
+      //         pos -= 5;
+      //         target.style.transform = `translateX(${pos}px)`;
+      //     }
+      // }
+
+      function play() {
+        // move 를 계속 감시한다 . arrowRight방향이 true 인지?
+        // true(오른쪽 키를 누르는 순간) 가 되는 순간 실행시킨다
+        if (keys.ArrowRight) {
+          pos += 5;
+          target.style.transform = `translateX(${pos}px)`;
+        }
+
+        if (keys.ArrowLeft) {
+          pos -= 5;
+          target.style.transform = `translateX(${pos}px)`;
+        }
+
+        requestAnimationFrame(play); // 브라우저에게 변화가 있을 때 다음 프레임에 play 함수가 실행 될거라는걸 미리 브라우저에게 알려줌
+        // 안정적으로 반복적으로 사용할수 있다
+      }
+
+      play(); // 재귀함수
+    </script>
+  </body>
+</html>
